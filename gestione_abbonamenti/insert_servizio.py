@@ -2,7 +2,7 @@ from models import Servizio, db
 
 def run():
     # 1. Chiediamo il nome del servizio in modo interattivo
-    print("--- Configurazione nuovo servizio ---")
+    print("--- Configurazione nuovo servizio ---dfdsgfgfd")
 
     # guarda impostazione python.analysis.typeCheckingMode e setta a "basic" per vedere la docs di strip()
     nome_input = input("Inserisci il nome del servizio (es. Netflix, Spotify): ").strip()
