@@ -1,4 +1,5 @@
 from models import Servizio, db
+from faker import Faker
 
 def run():
     # 1. Chiediamo il nome del servizio in modo interattivo
@@ -31,6 +32,26 @@ def run():
 
     except Exception as e:
         print(f"Errore durante l'inserimento: {e}")
+
+def inserisci_servizio_random():
+    # 1. Chiediamo il nome del servizio in modo interattivo
+    print("--- Configurazione nuovo servizio ---")
+    
+    try:
+        fake = Faker('it_IT')
+
+        with db.atomic():
+            servizio: Servizio = Servizio.create(
+                nome=fake.domain_name()
+            )
+
+        print(f"Inserito nuovo servizio: '{servizio.nome}' (ID: {servizio.id})")
+
+    except Exception as e:
+        print(f"Errore durante l'inserimento: {e}")        
     
 if __name__ == "__main__":
-    run()
+    #run()
+    # Crea n servizi in un colpo solo
+    for _ in range(100): 
+        inserisci_servizio_random()

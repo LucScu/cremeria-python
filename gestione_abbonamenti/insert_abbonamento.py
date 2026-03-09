@@ -1,4 +1,6 @@
 from models import Utente, Servizio, Abbonamento, db
+from peewee import fn, IntegrityError
+from faker import Faker
 
 def inserisci_abbonamento():
     print("--- Registrazione nuovo abbonamento ---")
@@ -34,5 +36,30 @@ def inserisci_abbonamento():
     except Exception as e:
         print(f"Errore durante l'inserimento: {e}")
 
+def inserisci_abbonamento_random():
+    try:
+        fake = Faker('it_IT')
+        
+        with db.atomic():
+            utente: Utente = Utente.select().order_by(fn.Rand()).get()
+            servizio: Servizio = Servizio.select().order_by(fn.Rand()).get()
+            abbonamento = Abbonamento.create(
+                utente=utente,
+                servizio=servizio,
+                data_iscrizione=fake.date_this_year()
+            )
+
+        print(f"Inserito nuovo abbonamento per utente '{utente.nome} {utente.cognome}' e servizio '{servizio.nome}' (ID: {abbonamento.id})")
+
+    except IntegrityError:
+        # la coppia esiste già, non facciamo nulla
+        return False
+
+    except Exception as e:
+        print(f"Errore durante l'inserimento: {e}")
+
 if __name__ == "__main__":
-    inserisci_abbonamento()
+    #inserisci_abbonamento()
+    # Crea n abbonamenti in un colpo solo
+    for _ in range(100): 
+        inserisci_abbonamento_random()

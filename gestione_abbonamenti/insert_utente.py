@@ -21,6 +21,6 @@ def inserisci_utente_random():
 
 if __name__ == "__main__":
     inserisci_utente_random()
-    # Crea 10 utenti in un colpo solo
+    # Crea n utenti in un colpo solo
     #for _ in range(100): 
     #    inserisci_utente_random()
