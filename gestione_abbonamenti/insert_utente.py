@@ -20,7 +20,7 @@ def inserisci_utente_random():
         print(f"Errore durante l'inserimento: {e}")
 
 if __name__ == "__main__":
-    inserisci_utente_random()
+    #inserisci_utente_random()
     # Crea n utenti in un colpo solo
-    #for _ in range(100): 
-    #    inserisci_utente_random()
+    for _ in range(100): 
+        inserisci_utente_random()
